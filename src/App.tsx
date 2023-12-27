@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+
 import "./App.css";
 import { socket } from "./connection";
 import { ConnectionState } from "./components/ConnectionState";
 import { ConnectionManager } from "./components/ConnectionManager";
 import { Events } from "./components/Events";
 import { MyForm } from "./components/MyForm";
+import SensorBox from "./components/SensorsBox";
 
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -36,11 +38,15 @@ function App() {
 
   return (
     <div className="App">
-      <ConnectionState isConnected={isConnected} />
-      {isConnected && <code>{socket.id}</code>}
-      <Events events={fooEvents} />
-      <ConnectionManager />
-      <MyForm />
+      <section className="Container" style={{ width: 350 }}>
+        <header className="App-header">
+          <ConnectionManager />
+          <ConnectionState id={socket.id} isConnected={isConnected} />
+        </header>
+        <Events events={fooEvents} />
+        <MyForm />
+        <SensorBox />
+      </section>
     </div>
   );
 }

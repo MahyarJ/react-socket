@@ -8,3 +8,16 @@
   font-size: 2vmin;
   color: white;
 }
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.App-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

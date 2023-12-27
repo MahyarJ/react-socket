@@ -1,3 +1,4 @@
+import { Button } from "@mui/joy";
 import { socket } from "../connection";
 
 export function ConnectionManager() {
@@ -10,9 +11,8 @@ export function ConnectionManager() {
   }
 
   return (
-    <>
-      <button onClick={connect}>Connect</button>
-      <button onClick={disconnect}>Disconnect</button>
-    </>
+    <Button onClick={socket.connected ? disconnect : connect}>
+      {socket.connected ? "Disonnect" : "Connect"}
+    </Button>
   );
 }

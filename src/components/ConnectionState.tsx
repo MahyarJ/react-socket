@@ -1,3 +1,5 @@
-export function ConnectionState({ isConnected }) {
-  return <p>State: {"" + isConnected}</p>;
+export function ConnectionState({ id, isConnected }) {
+  return (
+    <code style={{ textTransform: "uppercase" }}>{isConnected ? id : ""}</code>
+  );
 }
