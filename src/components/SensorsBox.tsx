@@ -1,4 +1,4 @@
-import { Button } from "@mui/joy";
+import { Button, ButtonGroup, Card } from "@mui/joy";
 import { useState } from "react";
 
 import { socket, URL } from "../connection";
@@ -18,13 +18,17 @@ const SensorBox = () => {
     setSensors(sensors);
   };
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <Button onClick={getSensorsViaSocket}>Socket | Get Sensors</Button>
-      <Button onClick={getSensorsViaREST}>REST | Get Sensors</Button>
-      {sensors.map((sensor) => (
-        <div key={sensor.id}>{sensor.name}</div>
-      ))}
-    </div>
+    <>
+      <ButtonGroup color="primary" variant="solid" buttonFlex={1}>
+        <Button onClick={getSensorsViaSocket}>Socket | Get Sensors</Button>
+        <Button onClick={getSensorsViaREST}>REST | Get Sensors</Button>
+      </ButtonGroup>
+      <Card>
+        {sensors.map((sensor) => (
+          <div key={sensor.id}>{sensor.value}</div>
+        ))}
+      </Card>
+    </>
   );
 };
 

@@ -5,14 +5,14 @@ import { Button, Input, Snackbar } from "@mui/joy";
 export function MyForm() {
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
-  const [response, setResponse] = useState({ endpoint: "", value: "" });
+  const [response, setResponse] = useState({ endpoint: "", value: [] });
   const [isLoading, setIsLoading] = useState(false);
 
   function onSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
 
-    socket.emit("do-some", value, (res) => {
+    socket.emit("set-sensors", value, (res) => {
       setIsLoading(false);
       setOpen(true);
       setValue("");
@@ -23,9 +23,10 @@ export function MyForm() {
   return (
     <form onSubmit={onSubmit}>
       <Input
+        placeholder="How many sensors..."
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        endDecorator={<Button disabled={isLoading}>Send to Backend</Button>}
+        endDecorator={<Button disabled={isLoading}>Set Sensors</Button>}
       />
       <Snackbar
         open={open}
@@ -40,7 +41,7 @@ export function MyForm() {
             <code>{`⚡️ server > ${response.endpoint}`}</code>
           </p>
           <p style={{ fontSize: "1rem" }}>
-            <code>{response.value}</code>
+            <code>{response.value} sensors are set</code>
           </p>
         </div>
       </Snackbar>

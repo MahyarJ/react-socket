@@ -12,7 +12,7 @@ export function ConnectionManager() {
 
   return (
     <Button onClick={socket.connected ? disconnect : connect}>
-      {socket.connected ? "Disonnect" : "Connect"}
+      {socket.connected ? "Disconnect" : "Connect"}
     </Button>
   );
 }
