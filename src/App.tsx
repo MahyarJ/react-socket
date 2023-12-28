@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useColorScheme } from "@mui/joy/styles";
 
 import "./App.css";
 import { socket } from "./connection";
@@ -11,6 +12,11 @@ import SensorBox from "./components/SensorsBox";
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
+  const { setMode } = useColorScheme();
+
+  useEffect(() => {
+    setMode("dark");
+  }, [setMode]);
 
   useEffect(() => {
     function onConnect() {

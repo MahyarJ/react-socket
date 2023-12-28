@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { socket } from "../connection";
-import { Button, Input } from "@mui/joy";
+import { Button, Input, Snackbar } from "@mui/joy";
 
 export function MyForm() {
   const [value, setValue] = useState("");
-  const [response, setResponse] = useState("");
+  const [open, setOpen] = useState(false);
+  const [response, setResponse] = useState({ endpoint: "", value: "" });
   const [isLoading, setIsLoading] = useState(false);
 
   function onSubmit(event) {
@@ -13,6 +14,7 @@ export function MyForm() {
 
     socket.emit("do-some", value, (res) => {
       setIsLoading(false);
+      setOpen(true);
       setValue("");
       setResponse(res);
     });
@@ -25,9 +27,23 @@ export function MyForm() {
         onChange={(e) => setValue(e.target.value)}
         endDecorator={<Button disabled={isLoading}>Send to Backend</Button>}
       />
-      <p style={{ fontSize: "1rem", paddingTop: "1rem" }}>
-        <code>{response || "..."}</code>
-      </p>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
+        <div>
+          <p>
+            <code>{`⚡️ server > ${response.endpoint}`}</code>
+          </p>
+          <p style={{ fontSize: "1rem" }}>
+            <code>{response.value}</code>
+          </p>
+        </div>
+      </Snackbar>
     </form>
   );
 }

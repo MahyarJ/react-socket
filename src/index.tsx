@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { CssVarsProvider } from "@mui/joy/styles";
 
 import "./reset.css";
 import "./index.css";
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <CssVarsProvider>
+      <App />
+    </CssVarsProvider>
   </React.StrictMode>
 );
 
