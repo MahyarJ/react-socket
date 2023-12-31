@@ -39,7 +39,9 @@ const SensorBox = () => {
       <div className="SensorGroup">
         {sensors.map((sensor) => (
           <Card key={sensor.id}>
-            <h1>{sensor.id}</h1>
+            <h1>
+              <code>{sensor.id}</code>
+            </h1>
             <p>{sensorValues[sensor.id] || ""}</p>
           </Card>
         ))}
