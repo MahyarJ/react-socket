@@ -26,7 +26,11 @@ export function MyForm() {
         placeholder="How many sensors..."
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        endDecorator={<Button disabled={isLoading}>Set Sensors</Button>}
+        endDecorator={
+          <Button type="submit" disabled={isLoading}>
+            Set Sensors
+          </Button>
+        }
       />
       <Snackbar
         open={open}
