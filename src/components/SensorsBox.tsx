@@ -1,22 +1,11 @@
-import { Button, ButtonGroup, Card } from "@mui/joy";
-import { useEffect, useState } from "react";
+import { Button, ButtonGroup } from "@mui/joy";
+import { useState } from "react";
 
 import { socket, URL } from "../connection";
+import Sensor from "./Sensor";
 
 const SensorBox = () => {
   const [sensors, setSensors] = useState([]);
-  const [sensorValues, setSensorValues] = useState({});
-
-  useEffect(() => {
-    const selected = sensors; // This could be configured by some logic
-    selected.forEach(({ id }) => {
-      socket.on(`sensor-${id}`, ({ value }) => {
-        setSensorValues((v) => {
-          return { ...v, [id]: value };
-        });
-      });
-    });
-  }, [sensors]);
 
   const getSensorsViaSocket = () => {
     socket.emit("get-sensors", (res) => {
@@ -38,12 +27,7 @@ const SensorBox = () => {
       </ButtonGroup>
       <div className="SensorGroup">
         {sensors.map((sensor) => (
-          <Card key={sensor.id}>
-            <h1>
-              <code>{sensor.id}</code>
-            </h1>
-            <p>{sensorValues[sensor.id] || ""}</p>
-          </Card>
+          <Sensor id={sensor.id} />
         ))}
       </div>
     </>
