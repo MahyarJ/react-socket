@@ -1,4 +1,3 @@
-import { Card } from "@mui/joy";
 import { useEffect, useState } from "react";
 
 import { socket } from "../connection";
@@ -13,14 +12,7 @@ const Sensor = ({ id }) => {
     };
   }, [id]);
 
-  return (
-    <Card key={id}>
-      <h1>
-        <code>{id}</code>
-      </h1>
-      <p>{value}</p>
-    </Card>
-  );
+  return <p>{value}</p>;
 };
 
 export default Sensor;

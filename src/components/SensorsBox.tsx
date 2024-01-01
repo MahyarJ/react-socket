@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from "@mui/joy";
 import { useState } from "react";
 
 import { socket, URL } from "../connection";
-import Sensor from "./Sensor";
+import SensorCard from "./SensorCard";
 
 const SensorBox = () => {
   const [sensors, setSensors] = useState([]);
@@ -27,7 +27,7 @@ const SensorBox = () => {
       </ButtonGroup>
       <div className="SensorGroup">
         {sensors.map((sensor) => (
-          <Sensor id={sensor.id} />
+          <SensorCard id={sensor.id} />
         ))}
       </div>
     </>
