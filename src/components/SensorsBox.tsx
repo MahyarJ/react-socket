@@ -27,7 +27,7 @@ const SensorBox = () => {
       </ButtonGroup>
       <div className="SensorGroup">
         {sensors.map((sensor) => (
-          <SensorCard id={sensor.id} />
+          <SensorCard key={sensor.id} id={sensor.id} />
         ))}
       </div>
     </>
