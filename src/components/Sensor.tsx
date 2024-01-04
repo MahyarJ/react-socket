@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
+import throttle from "lodash/throttle";
 
 import { socket } from "../connection";
 
-const Sensor = ({ id }) => {
+type SensorProps = {
+  id: string;
+  disabled?: boolean;
+  delay?: number;
+};
+
+const Sensor = ({ id, delay, disabled }: SensorProps) => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
-    socket.on(`sensor-${id}`, ({ value }) => setValue(value));
+    const throttleSet = throttle(setValue, delay);
+    socket.on(`sensor-${id}`, ({ value }) => !disabled && throttleSet(value));
     return () => {
       socket.off(`sensor-${id}`);
     };
-  }, [id]);
+  }, [id, disabled, delay]);
 
   return <p>{value}</p>;
 };

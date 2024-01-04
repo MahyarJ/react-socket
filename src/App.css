@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
+  user-select: none;
 }
 
 .App-header {
