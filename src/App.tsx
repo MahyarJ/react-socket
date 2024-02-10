@@ -8,6 +8,7 @@ import { ConnectionManager } from "./components/ConnectionManager";
 import { Events } from "./components/Events";
 import { MyForm } from "./components/MyForm";
 import SensorBox from "./components/SensorsBox";
+import useFpsMeter from "./hooks/useFps";
 
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -42,8 +43,11 @@ function App() {
     };
   }, []);
 
+  const fps = useFpsMeter();
+
   return (
     <div className="App">
+      <h3>{fps}</h3>
       <section className="Container" style={{ width: 350 }}>
         <header className="App-header">
           <ConnectionManager />
